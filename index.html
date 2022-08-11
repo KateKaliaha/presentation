@@ -19,7 +19,14 @@
     <!-- <script type="module" src="index.js">
 
         </script> -->
-    <script type="module" src="node_modules/reveal.js/dist/reveal.js"></script>
+        <script type="module">
+            import Reveal from './node_modules/reveal.js/dist/reveal.esm.js';
+            import Markdown from './node_modules/reveal.js/plugin/markdown/markdown.esm.js';
+            Reveal.initialize({
+              plugins: [ Markdown ]
+            });
+          </script>
+    <!-- <script type="module" src="node_modules/reveal.js/dist/reveal.js"></script>
     <script type="module" src="node_modules/reveal.js/plugin/notes/notes.js"></script>
     <script type="module" src="node_modules/reveal.js/plugin/markdown/markdown.js"></script>
     <script type="module" src="node_modules/reveal.js/plugin/highlight/highlight.js"></script>
@@ -28,6 +35,6 @@
             hash: true,
             plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
         });
-    </script>
+    </script> -->
 </body>
 </html>
