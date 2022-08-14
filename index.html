@@ -1,40 +1,325 @@
 <!DOCTYPE html> 
 <html lang="en"> 
 <head>
-
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./reveal.css"> 
     <link rel="stylesheet" href="./black.css">
-     <title>Document</title> 
+    <link rel="stylesheet" href="./monokai.css">
+    <link rel="shortcut icon" href="./assets/ico.png" type="image/x-icon">
+     <title>Presentation CSS Grid</title> 
 </head>
 <body>
     <div class="reveal">
         <div class="slides">
-            <section>Slide 1</section>
-            <section>Slide 2</section>
+
+            <section>
+                <section>
+                    <h3>CSS Grid Layout</h3>
+                    <h5>(aka “Grid” or “CSS Grid”)</h5>
+                    <p class="fragment" data-fragment-index="1">is a powerful tool that allows for two-dimensional
+                                                                layouts for columns and rows to be created on the web
+                    </p>
+                </section>
+                <section>
+                    <h4>What are the differences between CSS grid and flex-box?</h4>
+                    <p class="fragment" data-fragment-index="1">
+                        <img src="./assets/flex-vs-grid.png" alt="Differences between CSS and flex-box image">
+                    </p>
+                </section>
+                <section>
+                    <h4>Why not use bootstrap instead?</h4>
+                    <p class="fragment" data-fragment-index="1">
+                    The more I use CSS Grid, the more convinced I am that there is no benefit to be had by adding a layer of abstraction over it.
+                        CSS Grid is the layout framework baked right into the browser.
+                        <br>Jen Simmons</br>
+                    </p>
+                </section>
+            </section>
+
+
+            <section>
+                <section>
+                    <h3>Supporting</h3>
+                </section>
+                <section>
+                    <h4>Browsers</h4>
+                    <img src="./assets/browswer-support.png" alt="Browser support image">
+                </section>
+                <section>
+                    <h4>Mobiles</h4>
+                    <img src="./assets/mobile-support.png" alt="Mobile support image">
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h3>Important terminology</h3>
+                </section>
+                <section>
+                    <h4>Grid Container</h4>
+                    <img src="./assets/grid-container.png" alt="Grid container image">
+                </section>
+                <section>
+                    <h4>Grid item</h4>
+                    <img src="./assets/grid-item.png" alt="Grid item image">
+                </section>
+                <section>
+                    <h4>Grid line</h4>
+                    <img src="./assets/grid-line.png" alt="Grid line image">
+                </section>
+                <section>
+                    <h4>Grid cell</h4>
+                    <img src="./assets/grid-cell.png" alt="Grid cell image">
+                </section>
+                <section>
+                    <h4>Grid track</h4>
+                    <img src="./assets/grid-track.png" alt="Grid track image">
+                </section>
+                <section>
+                    <h4>Grid area</h4>
+                    <img src="./assets/grid-area.png" alt="Grid area image">
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h3>Properties for the Parent (Grid Container)</h3>
+                </section>
+
+                <section>
+                    <h4>display</h4>
+                        <pre class="fragment" data-fragment-index="1">
+                            <code data-trim data-noescape>
+                                .container {
+                                    display: grid | inline-grid;
+                                }
+                            </code></pre>
+                </section>
+
+                <section>
+                    <h6>grid-template-columns</h6>
+                    <h6>grid-template-rows</h6>
+                    <div style="display: flex;">
+                        <pre style="margin-right: 20px;" class="fragment" data-fragment-index="1">
+                            <code data-trim data-noescape>
+                                .container {
+                                    grid-template-columns: ...  ...;
+                                    /* e.g. 
+                                    1fr 1fr
+                                    minmax(10px, 1fr) 3fr
+                                    repeat(5, 1fr)
+                                    50px auto 100px 1fr
+                                    */
+                                    grid-template-rows: ... ...;
+                                    /* e.g. 
+                                    min-content 1fr min-content
+                                    100px 1fr max-content
+                                    */
+                                }
+                            </code>
+                        </pre>
+                        <img class="fragment" data-fragment-index="2" width="400px" src="./assets/template-columns-rows-01.png" alt="">
+                    </div>
+                </section>
+
+                <section>
+                    <h6>grid-template-areas</h6>
+                    <div style="display: flex;" style="align-items: center;" style="justify-content: space-between;">
+                    <pre style="font-size: 15px;" style="margin-right: 30px;">
+                        <code class="fragment" data-fragment-index="1" data-trim data-noescape>
+                            .item-a {
+                                grid-area: header;
+                            }
+                            .item-b {
+                                grid-area: main;
+                            }
+                            .item-c {
+                                grid-area: sidebar;
+                            }
+                            .item-d {
+                                grid-area: footer;
+                            }
+
+                            .container {
+                                display: grid;
+                                grid-template-columns: 50px 50px 50px 50px;
+                                grid-template-rows: auto;
+                                grid-template-areas: 
+                                    "header header header header"
+                                    "main main . sidebar"
+                                    "footer footer footer footer";
+                            }
+                        </code>
+                    </pre>
+                    <img class="fragment" data-fragment-index="2" width="400px" src="./assets/grid-template-areas.svg" alt="">
+                    </div>
+                </section>
+
+                <section>
+                    <h6>grid-template</h6>
+                        <pre style="font-size: 15px;">
+                            <code class="fragment" data-fragment-index="1" height="300px" data-trim data-noescape>
+                                .container {
+                                    grid-template: none | grid-template-rows / grid-template-columns;
+                                }
+                            </code>
+                        </pre>
+                        <pre style="font-size: 15px;">
+                            <code class="fragment" data-fragment-index="2" height="300px" data-trim data-noescape>
+                                .container {
+                                    grid-template:
+                                        [row1-start] "header header header" 25px [row1-end]
+                                        [row2-start] "footer footer footer" 25px [row2-end]
+                                        / auto 50px auto;
+                                }
+                            </code>
+                        </pre>
+                        <pre style="font-size: 15px;">
+                            <code class="fragment" data-fragment-index="3" height="300px" data-trim data-noescape>
+                                .container {
+                                    grid-template-rows: [row1-start] 25px [row1-end row2-start] 25px [row2-end];
+                                    grid-template-columns: auto 50px auto;
+                                    grid-template-areas: 
+                                        "header header header" 
+                                        "footer footer footer";
+                                }
+                            </code>
+                        </pre>
+                </section>
+
+                <section>
+                    <h5>justify-items</h5>
+                    <div style="display: inline-block;">
+                        <div style="display: flex;" style="align-items: center;"  class="fragment" data-fragment-index="1">
+                            <p style="margin-right: 50px;">Start</p>
+                            <img width="250px" src="./assets/ji-start.png" alt="">
+                        </div>
+                        <div style="display: flex;" style="align-items: center;" class="fragment" data-fragment-index="2">
+                            <p style="margin-right: 65px;">End</p>
+                            <img width="250px" src="./assets/ji-end.png" alt="">
+                        </div>
+                        <div style="display: flex;" style="align-items: center;" class="fragment" data-fragment-index="3" >
+                            <p style="margin-right: 15px;">Center</p>
+                            <img width="250px" src="./assets/ji-center.png" alt="">
+                        </div>
+                        <div style="display: flex;" style="align-items: center;" class="fragment" data-fragment-index="4">
+                            <p style="margin-right: 8px;">Stretch</p>
+                            <img width="250px" src="./assets/ji-stretch.png" alt="">
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h5>align-items</h5>
+                    <div style="display: inline-block;">
+                        <div style="display: flex;" style="align-items: center;"  class="fragment" data-fragment-index="1">
+                            <p style="margin-right: 50px;">Start</p>
+                            <img width="250px" src="./assets/ai-start.png" alt="">
+                        </div>
+                        <div style="display: flex;" style="align-items: center;" class="fragment" data-fragment-index="2">
+                            <p style="margin-right: 65px;">End</p>
+                            <img width="250px" src="./assets/ai-end.png" alt="">
+                        </div>
+                        <div style="display: flex;" style="align-items: center;" class="fragment" data-fragment-index="3" >
+                            <p style="margin-right: 15px;">Center</p>
+                            <img width="250px" src="./assets/ai-center.png" alt="">
+                        </div>
+                        <div style="display: flex;" style="align-items: center;" class="fragment" data-fragment-index="4">
+                            <p style="margin-right: 8px;">Stretch</p>
+                            <img width="250px" src="./assets/ai-stretch.png" alt="">
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h3>Properties for the Children (Grid Items)</h3>
+                </section>
+                <section>
+                    <h5 style="font-size: 20px;">grid-column-start, grid-column-end</h5>
+                    <h5 style="font-size: 20px;">grid-row-start, grid-row-end</h5>
+                    <div>
+                        <div style="display: flex;" style="justify-content: space-between;" style="align-items: center;">
+                            <pre>
+                                <code style="width: 90%;" style="font-size: 15px;" style="margin-right: 15px;" class="fragment" data-fragment-index="1" data-trim data-noescape>
+                                    .item-a {
+                                        grid-column-start: 2;
+                                        grid-column-end: five;
+                                        grid-row-start: row1-start;
+                                        grid-row-end: 3;
+                                    }
+                                </code>
+                            </pre>
+                            <img class="fragment" data-fragment-index="2" width="350px" src="./assets/grid-column-row-start-end-01.png" alt="">
+                        </div>
+                        <div style="display: flex;" style="justify-content: space-between;" style="align-items: center;">
+                            <pre>
+                                <code style="width: 90%;" class="fragment" data-fragment-index="3" data-trim data-noescape>
+                                    .item-b {
+                                        grid-column-start: 1;
+                                        grid-column-end: span col4-start;
+                                        grid-row-start: 2;
+                                        grid-row-end: span 2;
+                                      }
+                                </code>
+                            </pre>
+                            <img class="fragment" data-fragment-index="4" width="350px" src="./assets/grid-column-row-start-end-02.png" alt="">
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h3>Grid flow</h3>
+                </section>
+                <section>
+                    <pre>
+                        <code  data-trim data-noescape>
+                            .grid-container {
+                                grid-auto-flow: dense; // default is row
+                            }
+                        </code>
+                    </pre>
+                    <img class="fragment" data-fragment-index="1" width="700px" src="./assets/inmlemented-grid.png" alt="">
+                </section>
+            </section>
+
+            <section>
+                <h3>Advantages</h3>
+                <ul>
+                    <li class="fragment" data-fragment-index="1">Reduced code bloat</li>
+                    <li class="fragment" data-fragment-index="2">Improved semantics</li>
+                    <li class="fragment" data-fragment-index="3">Reduced file sizes</li>
+                    <li class="fragment" data-fragment-index="4">Speed of development</li>
+                    <li class="fragment" data-fragment-index="5">Style labels</li>
+                    <li class="fragment" data-fragment-index="6">Two-dimensional</li>
+                    <li class="fragment" data-fragment-index="7">Nested Grids</li>
+                    <li class="fragment" data-fragment-index="8">Responsiveness </li>
+                </ul>
+            </section>
+
+            <section>
+                <h3>Disadvantages</h3>
+                <ul>
+                    <li class="fragment" data-fragment-index="1">Need to support browsers still in use that do not handle them</li>
+                    <li class="fragment" data-fragment-index="2">The code may have been developed before the technology was widely implemented</li>
+                    <li class="fragment" data-fragment-index="3">The developer may be more experienced with and comfortable using other methods</li>
+                </ul>
+            </section>
+
         </div>
     </div>
-    <!-- <script type="module" src="index.js">
-
-        </script> -->
-        <script type="module">
-            import Reveal from './reveal.esm.js';
-            import Markdown from './markdown.esm.js';
-            Reveal.initialize({
-              plugins: [ Markdown ]
-            });
-          </script>
-    <!-- <script type="module" src="node_modules/reveal.js/dist/reveal.js"></script>
-    <script type="module" src="node_modules/reveal.js/plugin/notes/notes.js"></script>
-    <script type="module" src="node_modules/reveal.js/plugin/markdown/markdown.js"></script>
-    <script type="module" src="node_modules/reveal.js/plugin/highlight/highlight.js"></script>
     <script type="module">
+        import Reveal from './reveal.esm.js';
+        import Markdown from './markdown.esm.js';
+        import RevealHighlight from './highlight.esm.js'
         Reveal.initialize({
-            hash: true,
-            plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+            plugins: [ Markdown, RevealHighlight ]
         });
-    </script> -->
+    </script>
 </body>
 </html>
